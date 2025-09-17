@@ -1,241 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Core Auth Secure - Next-Gen Authentication</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-.stars {
-    position: fixed; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; z-index:1; opacity:0; transition:opacity 2s ease-in-out;
-}
-
-.star { position:absolute; background:#1a202c; border-radius:50%; animation:twinkle 3s infinite; }
-
-@keyframes twinkle { 0%,100%{opacity:0.3;transform:scale(1);} 50%{opacity:1;transform:scale(1.2);} }
-
-@keyframes float { 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-20px);} }
-
-.container { position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; text-align:center; }
-
-.hero-section { max-width:800px; margin-bottom:4rem; }
-
-.logo {
-    display:flex; align-items:center; justify-content:center; margin-bottom:0.5rem;
-    animation:float 6s ease-in-out infinite;
-}
-
-.logo-icon {
-    width:80px; height:80px; background:#ffffff; /* fundo branco */
-    border-radius:20px; display:flex; align-items:center; justify-content:center;
-    margin-right:1rem; box-shadow:0 20px 40px rgba(26,32,44,0.3); overflow:hidden;
-}
-
-.logo-icon img.logo-img {
-    width:50px; height:50px; object-fit:contain; border:2px solid #4a5568; border-radius:12px;
-    padding:2px; transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-icon img.logo-img:hover { transform:scale(1.1); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
-
-.logo-text { font-size:3rem; font-weight:800; background:linear-gradient(45deg,#1a202c,#4a5568); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 4px 20px rgba(0,0,0,0.1); }
-
-.under-dev { color:#ef4444; font-weight:600; margin-top:0.5rem; }
-
-.tagline { font-size:1.5rem; color:#4a5568; margin-bottom:1rem; font-weight:300; }
-
-.description { font-size:1.2rem; color:#718096; margin-bottom:3rem; line-height:1.6; }
-
-.features {
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem;
-    margin-bottom:4rem; max-width:900px;
-}
-
-.feature-card {
-    background:rgba(255,255,255,0.7); backdrop-filter:blur(20px); border-radius:20px;
-    padding:2rem; border:1px solid rgba(0,0,0,0.1); transition:all 0.8s ease; cursor:pointer;
-    opacity:0; transform:translateY(30px);
-}
-
-.feature-card:hover { transform:translateY(-10px); background:rgba(255,255,255,0.9); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
-
-.feature-icon { font-size:3rem; margin-bottom:1rem; display:block; }
-
-.feature-title { font-size:1.3rem; font-weight:600; color:#1a202c; margin-bottom:0.5rem; }
-
-.feature-text { color:#4a5568; line-height:1.5; }
-
-.contact-section {
-    background:rgba(255,255,255,0.7); backdrop-filter:blur(20px); border-radius:25px;
-    padding:3rem; border:1px solid rgba(0,0,0,0.1); max-width:500px; width:100%;
-}
-
-.contact-title { font-size:2rem; font-weight:700; color:#1a202c; margin-bottom:1rem; }
-
-.contact-subtitle { color:#4a5568; margin-bottom:2rem; font-size:1.1rem; }
-
-.email-form { display:flex; flex-direction:column; gap:1rem; }
-
-.input-group { position:relative; }
-
-.email-link {
-    display:inline-flex; align-items:center; gap:0.5rem; padding:1rem 1.5rem;
-    border:2px solid #1a202c; border-radius:15px; background:#1a202c;
-    color:white; font-size:1.1rem; text-decoration:none; transition:all 0.3s ease;
-    backdrop-filter:blur(10px); font-weight:500;
-}
-
-.email-link:hover { border-color:#2d3748; background:#2d3748; box-shadow:0 10px 30px rgba(26,32,44,0.3); transform:translateY(-2px); }
-
-.footer { margin-top:4rem; color:#718096; font-size:0.9rem; }
-
-@media (max-width:768px){
-    .logo-text{font-size:2rem;}
-    .tagline{font-size:1.2rem;}
-    .description{font-size:1rem;}
-    .features{grid-template-columns:1fr;}
-    .contact-section{margin:0 1rem;}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App - Made by Core Auth</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="stars" id="stars"></div>
-
-<div class="container">
-    <div class="hero-section">
-        <div class="logo">
-            <div class="logo-icon">
-                <a href="https://core-auth-secure.netlify.app" target="_blank">
-                    <img src="https://i.ibb.co/Z6HbZFd8/favicon-png-removebg-preview.png" alt="Core Auth Logo" class="logo-img">
-                </a>
+    <div class="container">
+        <div class="quiz-container">
+            <!-- Loading Screen -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading questions...</p>
             </div>
-            <h1 class="logo-text">Core Auth</h1>
-        </div>
-        <p class="under-dev">⚠️ Under Development – Launching November</p>
 
-        <p class="tagline" id="motivationalQuote">Loading inspiration...</p>
-        <p class="description">
-            Indie developer building simple authentication tools. Focused on functionality for your projects.
-        </p>
-    </div>
+            <!-- Quiz Screen -->
+            <div id="quiz" class="quiz hidden">
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span id="question-counter">Question 1 of 10</span>
+                        <span id="score-display">Score: 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                </div>
 
-    <div class="features">
-        <div class="feature-card">
-            <span class="feature-icon">🔧</span>
-            <h3 class="feature-title">Pragmatic</h3>
-            <p class="feature-text">Direct solutions that work. No fluff, just code that solves.</p>
-        </div>
+                <h2 id="question" class="question">Question will appear here</h2>
 
-        <div class="feature-card">
-            <span class="feature-icon">⚡</span>
-            <h3 class="feature-title">Supabase</h3>
-            <p class="feature-text">Using Supabase as backend. Reliable, fast, and well-documented.</p>
-        </div>
-
-        <div class="feature-card">
-            <span class="feature-icon">🎯</span>
-            <h3 class="feature-title">Open Source</h3>
-            <p class="feature-text">Open and transparent code. You can see exactly how it works.</p>
-        </div>
-    </div>
-
-    <div class="contact-section">
-        <h2 class="contact-title">Contact Me</h2>
-        <p class="contact-subtitle">Have any questions or suggestions? Send an email!</p>
-
-        <div class="email-form">
-            <div class="input-group">
-                <a href="mailto:core.auth.login@gmail.com" class="email-link">
-                    📧 core.auth.login@gmail.com
-                </a>
+                <div id="answers" class="answers">
+                    <!-- Answers will be inserted here via JavaScript -->
+                </div>
             </div>
-            <p style="color:#718096;margin-top:1rem;font-size:0.9rem;">I reply whenever I can 😊</p>
+
+            <!-- Result Screen -->
+            <div id="result" class="result hidden">
+                <h2>Quiz Finished!</h2>
+                <div id="final-score" class="final-score">0/10</div>
+                <p id="result-message">You got 0 out of 10 questions correct</p>
+                <button id="restart-btn" class="btn btn-primary">Play Again</button>
+            </div>
         </div>
     </div>
 
-    <div class="footer">
-        <p>Core Auth - Personal project by an indie developer 🚀</p>
-    </div>
-</div>
+    <footer class="footer">
+        <p>Made by <span class="brand">Core Auth</span></p>
+    </footer>
 
-<script>
-function createStars(){
-    const starsContainer=document.getElementById('stars');
-    const numberOfStars=50;
-    for(let i=0;i<numberOfStars;i++){
-        const star=document.createElement('div');
-        star.className='star';
-        const size=Math.random()*3+1;
-        star.style.width=size+'px';
-        star.style.height=size+'px';
-        star.style.left=Math.random()*100+'%';
-        star.style.top=Math.random()*100+'%';
-        star.style.animationDelay=(Math.random()*3)+'s';
-        star.style.animationDuration=(2+Math.random()*3)+'s';
-        starsContainer.appendChild(star);
-    }
-    setTimeout(()=>{starsContainer.style.opacity=1;},100);
-}
-
-function animateFeatureCards(){
-    const cards=document.querySelectorAll('.feature-card');
-    cards.forEach((card,index)=>{
-        setTimeout(()=>{
-            card.style.opacity='1';
-            card.style.transform='translateY(0)';
-        },index*200);
-    });
-}
-
-const motivationalQuotes=[
-    "Code with purpose, ship with confidence 🚀",
-    "Every bug is just a feature in disguise 🐛",
-    "Building the future, one commit at a time ⚡",
-    "Coffee in, code out, magic happens ☕",
-    "Debugging is like being a detective 🔍",
-    "Great software starts with great ideas 💡",
-    "Innovation happens when you stop saying 'impossible' 🌟",
-    "The best code is code that works 🎯",
-    "Progress over perfection, always 📈",
-    "Dream it, code it, ship it 🛠️",
-    "Every line of code tells a story 📚",
-    "Build something people actually need 💪",
-    "Simple solutions to complex problems 🧩",
-    "Code is poetry for machines 🎭",
-    "Make it work, make it fast, make it beautiful 🎨"
-];
-
-function setRandomQuote(){
-    const quoteElement=document.getElementById('motivationalQuote');
-    const randomQuote=motivationalQuotes[Math.floor(Math.random()*motivationalQuotes.length)];
-    quoteElement.textContent=randomQuote;
-}
-
-window.addEventListener('load',()=>{
-    createStars();
-    setRandomQuote();
-    setTimeout(animateFeatureCards,500);
-    document.querySelector('.email-link').addEventListener('click',function(e){
-        this.style.transform='translateY(-3px) scale(1.02)';
-        setTimeout(()=>{this.style.transform='translateY(-2px)';},150);
-    });
-});
-
-window.addEventListener('scroll',()=>{
-    const scrolled=window.pageYOffset;
-    const stars=document.getElementById('stars');
-    stars.style.transform=`translateY(${scrolled*0.5}px)`;
-});
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
 
